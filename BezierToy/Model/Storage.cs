@@ -16,32 +16,53 @@ namespace BezierToy
     {
         public void Save(string filename)
         {
-            using (XmlTextWriter tw = new XmlTextWriter(filename, Encoding.ASCII))
+            using (XmlTextWriter tw = new XmlTextWriter(filename, Encoding.UTF8))
             {
                 tw.Formatting = Formatting.Indented;
                 tw.Indentation = 4;
                 tw.WriteStartDocument(true);
-                tw.WriteStartElement("bezier-toy");
+                tw.WriteDocType("plist", "-//Apple Computer//DTD PLIST 1.0//EN", "http://www.apple.com/DTDs/PropertyList-1.0.dtd", null);
+                tw.WriteStartElement("plist");
+                tw.WriteAttributeString(
+                  "version", "1.0");
+                tw.WriteStartElement("dict");
 
                 tw.WriteStartElement("base-curve");
                 tw.WriteAttributeString(
                     "color",
                     BaseCurve.Color.ToArgb().ToString("X8")
                 );
+                tw.WriteEndElement();
+
+                Vector2D startPoint = BaseCurve.Points.First();
+                tw.WriteStartElement("startPoint");
+                tw.WriteAttributeString(
+                    "x",
+                    startPoint.X.ToString(CultureInfo.InvariantCulture)
+                );
+                tw.WriteAttributeString(
+                    "y",
+                    startPoint.Y.ToString(CultureInfo.InvariantCulture)
+                );
+                tw.WriteEndElement();
+
+
+                tw.WriteElementString("key", "points");
+                //tw.WriteStartElement("array");
+                tw.WriteStartElement("array");
+               
                 foreach (Vector2D point in BaseCurve.Points)
                 {
-                    tw.WriteStartElement("point");
-                    tw.WriteAttributeString(
-                        "x",
-                        point.X.ToString(CultureInfo.InvariantCulture)
-                    );
-                    tw.WriteAttributeString(
-                        "y",
-                        point.Y.ToString(CultureInfo.InvariantCulture)
-                    );
-                    tw.WriteEndElement();
+
+                    Vector2D temp = point - startPoint;
+                    tw.WriteElementString("string", "{"
+                        + temp.X.ToString(CultureInfo.InvariantCulture)
+                        + ","
+                        + (-temp.Y).ToString(CultureInfo.InvariantCulture)
+                        + "}");
                 }
                 tw.WriteEndElement();
+
 
                 foreach (ReducedBezierCurve curve in ReducedCurves)
                 {
@@ -64,7 +85,20 @@ namespace BezierToy
                 tw.WriteEndDocument();
             }
         }
+        private Vector2D PointFromString(string str) {
+            //double 
+            string newstr = str.Replace("{","");
+            newstr = newstr.Replace("}", "");
+            string[] strs = newstr.Split(',');
 
+            return new Vector2D(double.Parse(
+                           strs[0],
+                            CultureInfo.InvariantCulture
+                        ), - double.Parse(
+                           strs[1],
+                            CultureInfo.InvariantCulture
+                        ));
+        }
         public void Load(string filename)
         {
             // We assume model is clear.
@@ -73,26 +107,35 @@ namespace BezierToy
             doc.Load(filename);
 
             BaseCurve.Points.Clear();
-            XmlNode baseCurveNode = doc.SelectSingleNode("bezier-toy/base-curve");
+            XmlNode dictNode = doc.SelectSingleNode("plist/dict");
+            XmlNode baseCurveNode = dictNode.SelectSingleNode("base-curve");
+            
             BaseCurve.Color = Color.FromArgb(int.Parse(
                 baseCurveNode.Attributes["color"].Value,
                 NumberStyles.HexNumber
             ));
-            foreach (XmlNode pointNode in baseCurveNode.SelectNodes("point"))
-                BaseCurve.Points.Add(new Vector2D(
+
+            XmlNode startPointNode = dictNode.SelectSingleNode("startPoint");
+            Vector2D startPoint = new Vector2D(
                     double.Parse(
-                        pointNode.Attributes["x"].Value,
+                        startPointNode.Attributes["x"].Value,
                         CultureInfo.InvariantCulture
                     ),
                     double.Parse(
-                        pointNode.Attributes["y"].Value,
+                        startPointNode.Attributes["y"].Value,
                         CultureInfo.InvariantCulture
                     )
-                ));
+                );
+            
+            foreach (XmlNode pointNode in dictNode.SelectNodes("array/string"))
+            {
+                Vector2D vec = PointFromString(pointNode.InnerText);
+                BaseCurve.Points.Add(vec + startPoint);
+             }
 
             SelectedCurve = null;
             ReducedCurves.Clear();
-            foreach (XmlNode reducedCurveNode in doc.SelectNodes("bezier-toy/reduced-curve"))
+            foreach (XmlNode reducedCurveNode in dictNode.SelectNodes("reduced-curve"))
             {
                 ReducerRecord record = Reducers.Find(
                     r => r.XmlName == reducedCurveNode.Attributes["method"]

@@ -14,6 +14,7 @@ namespace BezierToy
     class View
     {
         private static View instance;
+        /// <exclude />
         public static View Instance { get {
             if (instance == null)
                 instance = new View();

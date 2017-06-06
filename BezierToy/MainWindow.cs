@@ -292,8 +292,9 @@ namespace BezierToy
 
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (saveModelDialog.ShowDialog() == DialogResult.OK)
+            if (saveModelDialog.ShowDialog() == DialogResult.OK) {
                 Model.Save(saveModelDialog.FileName);
+            }
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -318,10 +319,11 @@ namespace BezierToy
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (Model.FileName == null)
+            if (Model.FileName == null){
                 saveAsToolStripMenuItem_Click(sender, e);
-            else
+            }else{
                 Model.Save(Model.FileName);
+            }            
         }
 
         private void closeToolStripMenuItem_Click(object sender, EventArgs e)

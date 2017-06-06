@@ -32,6 +32,7 @@
             System.Windows.Forms.Label baseCurveNameLabel;
             System.Windows.Forms.Label baseCurveDegreeLabel;
             System.Windows.Forms.Label selectedCurveLabel;
+            this.baseCurveBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.modifyButton = new System.Windows.Forms.Button();
             this.dragButton = new System.Windows.Forms.Button();
             this.canvas = new System.Windows.Forms.PictureBox();
@@ -58,7 +59,10 @@
             this.controlPointsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.connectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.settinhToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bztPngToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reducedCurvesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.modelBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.removeButton = new System.Windows.Forms.Button();
             this.addButton = new System.Windows.Forms.Button();
             this.noneLabel = new System.Windows.Forms.Label();
@@ -67,16 +71,14 @@
             this.exportDialog = new System.Windows.Forms.SaveFileDialog();
             this.reducedBezierCurveDetailView = new BezierToy.ReducedBezierCurveDetailView();
             this.reducedBezierCurvesView = new BezierToy.ReducedBezierCurvesView();
-            this.baseCurveBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.baseCurveColorView = new BezierToy.ColorView();
-            this.modelBindingSource = new System.Windows.Forms.BindingSource(this.components);
             baseCurveNameLabel = new System.Windows.Forms.Label();
             baseCurveDegreeLabel = new System.Windows.Forms.Label();
             selectedCurveLabel = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.baseCurveBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.canvas)).BeginInit();
             this.menu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.reducedCurvesBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.baseCurveBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.modelBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -84,9 +86,9 @@
             // 
             baseCurveNameLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             baseCurveNameLabel.AutoSize = true;
-            baseCurveNameLabel.Location = new System.Drawing.Point(721, 92);
+            baseCurveNameLabel.Location = new System.Drawing.Point(721, 85);
             baseCurveNameLabel.Name = "baseCurveNameLabel";
-            baseCurveNameLabel.Size = new System.Drawing.Size(62, 13);
+            baseCurveNameLabel.Size = new System.Drawing.Size(65, 12);
             baseCurveNameLabel.TabIndex = 12;
             baseCurveNameLabel.Text = "Base Curve";
             // 
@@ -95,21 +97,25 @@
             baseCurveDegreeLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             baseCurveDegreeLabel.AutoSize = true;
             baseCurveDegreeLabel.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.baseCurveBindingSource, "Degree", true));
-            baseCurveDegreeLabel.Location = new System.Drawing.Point(890, 92);
+            baseCurveDegreeLabel.Location = new System.Drawing.Point(890, 85);
             baseCurveDegreeLabel.MinimumSize = new System.Drawing.Size(26, 0);
             baseCurveDegreeLabel.Name = "baseCurveDegreeLabel";
-            baseCurveDegreeLabel.Size = new System.Drawing.Size(26, 13);
+            baseCurveDegreeLabel.Size = new System.Drawing.Size(26, 12);
             baseCurveDegreeLabel.TabIndex = 5;
             baseCurveDegreeLabel.Text = "0";
             baseCurveDegreeLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // baseCurveBindingSource
+            // 
+            this.baseCurveBindingSource.DataSource = typeof(BezierToy.BezierCurve);
             // 
             // selectedCurveLabel
             // 
             selectedCurveLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             selectedCurveLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            selectedCurveLabel.Location = new System.Drawing.Point(691, 457);
+            selectedCurveLabel.Location = new System.Drawing.Point(691, 422);
             selectedCurveLabel.Name = "selectedCurveLabel";
-            selectedCurveLabel.Size = new System.Drawing.Size(250, 24);
+            selectedCurveLabel.Size = new System.Drawing.Size(250, 22);
             selectedCurveLabel.TabIndex = 18;
             selectedCurveLabel.Text = "Selected Curve";
             selectedCurveLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -117,9 +123,9 @@
             // modifyButton
             // 
             this.modifyButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.modifyButton.Location = new System.Drawing.Point(691, 27);
+            this.modifyButton.Location = new System.Drawing.Point(691, 25);
             this.modifyButton.Name = "modifyButton";
-            this.modifyButton.Size = new System.Drawing.Size(250, 23);
+            this.modifyButton.Size = new System.Drawing.Size(250, 21);
             this.modifyButton.TabIndex = 1;
             this.modifyButton.Text = "Modify";
             this.modifyButton.UseVisualStyleBackColor = true;
@@ -128,9 +134,9 @@
             // dragButton
             // 
             this.dragButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.dragButton.Location = new System.Drawing.Point(691, 56);
+            this.dragButton.Location = new System.Drawing.Point(691, 52);
             this.dragButton.Name = "dragButton";
-            this.dragButton.Size = new System.Drawing.Size(250, 23);
+            this.dragButton.Size = new System.Drawing.Size(250, 21);
             this.dragButton.TabIndex = 2;
             this.dragButton.Text = "Drag";
             this.dragButton.UseVisualStyleBackColor = true;
@@ -143,9 +149,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.canvas.BackColor = System.Drawing.Color.White;
             this.canvas.Cursor = System.Windows.Forms.Cursors.Cross;
-            this.canvas.Location = new System.Drawing.Point(12, 27);
+            this.canvas.Location = new System.Drawing.Point(12, 25);
             this.canvas.Name = "canvas";
-            this.canvas.Size = new System.Drawing.Size(673, 586);
+            this.canvas.Size = new System.Drawing.Size(673, 541);
             this.canvas.TabIndex = 3;
             this.canvas.TabStop = false;
             this.canvas.Click += new System.EventHandler(this.canvas_Click);
@@ -161,10 +167,11 @@
             this.menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.editToolStripMenuItem,
-            this.viewToolStripMenuItem});
+            this.viewToolStripMenuItem,
+            this.settinhToolStripMenuItem});
             this.menu.Location = new System.Drawing.Point(0, 0);
             this.menu.Name = "menu";
-            this.menu.Size = new System.Drawing.Size(953, 24);
+            this.menu.Size = new System.Drawing.Size(953, 25);
             this.menu.TabIndex = 4;
             this.menu.Text = "menu";
             // 
@@ -180,14 +187,14 @@
             this.toolStripSeparator2,
             this.closeToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(39, 21);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
             this.newToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+N";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
             this.newToolStripMenuItem.Text = "New";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
@@ -195,20 +202,20 @@
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+O";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(183, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(196, 6);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+S";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
@@ -216,7 +223,7 @@
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
             this.saveAsToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+Shift+S";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
             this.saveAsToolStripMenuItem.Text = "Save As";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
@@ -227,40 +234,40 @@
             this.asPNGToolStripMenuItem,
             this.asBMPToolStripMenuItem});
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
             this.exportToolStripMenuItem.Text = "Export";
             // 
             // asJPGToolStripMenuItem
             // 
             this.asJPGToolStripMenuItem.Name = "asJPGToolStripMenuItem";
-            this.asJPGToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
+            this.asJPGToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.asJPGToolStripMenuItem.Text = "As JPEG";
             this.asJPGToolStripMenuItem.Click += new System.EventHandler(this.asJPGToolStripMenuItem_Click);
             // 
             // asPNGToolStripMenuItem
             // 
             this.asPNGToolStripMenuItem.Name = "asPNGToolStripMenuItem";
-            this.asPNGToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
+            this.asPNGToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.asPNGToolStripMenuItem.Text = "As PNG";
             this.asPNGToolStripMenuItem.Click += new System.EventHandler(this.asPNGToolStripMenuItem_Click);
             // 
             // asBMPToolStripMenuItem
             // 
             this.asBMPToolStripMenuItem.Name = "asBMPToolStripMenuItem";
-            this.asBMPToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
+            this.asBMPToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.asBMPToolStripMenuItem.Text = "As BMP";
             this.asBMPToolStripMenuItem.Click += new System.EventHandler(this.asBMPToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(183, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(196, 6);
             // 
             // closeToolStripMenuItem
             // 
             this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
             this.closeToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+Q";
-            this.closeToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.closeToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
             this.closeToolStripMenuItem.Text = "Exit";
             this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
             // 
@@ -272,26 +279,26 @@
             this.modifyToolStripMenuItem,
             this.dragToolStripMenuItem});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(42, 21);
             this.editToolStripMenuItem.Text = "Edit";
             // 
             // selectAllToolStripMenuItem
             // 
             this.selectAllToolStripMenuItem.Name = "selectAllToolStripMenuItem";
             this.selectAllToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+A";
-            this.selectAllToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.selectAllToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.selectAllToolStripMenuItem.Text = "Select All";
             this.selectAllToolStripMenuItem.Click += new System.EventHandler(this.selectAllToolStripMenuItem_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(161, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(170, 6);
             // 
             // modifyToolStripMenuItem
             // 
             this.modifyToolStripMenuItem.Name = "modifyToolStripMenuItem";
-            this.modifyToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.modifyToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.modifyToolStripMenuItem.Text = "Modify";
             this.modifyToolStripMenuItem.Click += new System.EventHandler(this.modifyToolStripMenuItem_Click);
             // 
@@ -299,7 +306,7 @@
             // 
             this.dragToolStripMenuItem.Name = "dragToolStripMenuItem";
             this.dragToolStripMenuItem.ShortcutKeyDisplayString = "Space";
-            this.dragToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.dragToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.dragToolStripMenuItem.Text = "Drag";
             this.dragToolStripMenuItem.Click += new System.EventHandler(this.dragToolStripMenuItem_Click);
             // 
@@ -309,13 +316,13 @@
             this.centerCurveToolStripMenuItem,
             this.controlPointsToolStripMenuItem});
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-            this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(47, 21);
             this.viewToolStripMenuItem.Text = "View";
             // 
             // centerCurveToolStripMenuItem
             // 
             this.centerCurveToolStripMenuItem.Name = "centerCurveToolStripMenuItem";
-            this.centerCurveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.centerCurveToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.centerCurveToolStripMenuItem.Text = "Center";
             this.centerCurveToolStripMenuItem.Click += new System.EventHandler(this.centerCurveToolStripMenuItem_Click);
             // 
@@ -325,7 +332,7 @@
             this.showToolStripMenuItem,
             this.connectToolStripMenuItem});
             this.controlPointsToolStripMenuItem.Name = "controlPointsToolStripMenuItem";
-            this.controlPointsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.controlPointsToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.controlPointsToolStripMenuItem.Text = "Control Points";
             // 
             // showToolStripMenuItem
@@ -334,7 +341,7 @@
             this.showToolStripMenuItem.CheckOnClick = true;
             this.showToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.showToolStripMenuItem.Name = "showToolStripMenuItem";
-            this.showToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
+            this.showToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.showToolStripMenuItem.Text = "Show";
             this.showToolStripMenuItem.Click += new System.EventHandler(this.showToolStripMenuItem_Click);
             // 
@@ -344,21 +351,44 @@
             this.connectToolStripMenuItem.CheckOnClick = true;
             this.connectToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.connectToolStripMenuItem.Name = "connectToolStripMenuItem";
-            this.connectToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
+            this.connectToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.connectToolStripMenuItem.Text = "Connect";
             this.connectToolStripMenuItem.Click += new System.EventHandler(this.connectToolStripMenuItem_Click);
+            // 
+            // settinhToolStripMenuItem
+            // 
+            this.settinhToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.bztPngToolStripMenuItem});
+            this.settinhToolStripMenuItem.Name = "settinhToolStripMenuItem";
+            this.settinhToolStripMenuItem.Size = new System.Drawing.Size(60, 21);
+            this.settinhToolStripMenuItem.Text = "Setting";
+            this.settinhToolStripMenuItem.Click += new System.EventHandler(this.settinhToolStripMenuItem_Click);
+            // 
+            // bztPngToolStripMenuItem
+            // 
+            this.bztPngToolStripMenuItem.Checked = true;
+            this.bztPngToolStripMenuItem.CheckOnClick = true;
+            this.bztPngToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.bztPngToolStripMenuItem.Name = "bztPngToolStripMenuItem";
+            this.bztPngToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.bztPngToolStripMenuItem.Text = "Save bzt Png";
+            this.bztPngToolStripMenuItem.Click += new System.EventHandler(this.bztPngToolStripMenuItem_Click);
             // 
             // reducedCurvesBindingSource
             // 
             this.reducedCurvesBindingSource.DataMember = "ReducedCurves";
             this.reducedCurvesBindingSource.DataSource = this.modelBindingSource;
             // 
+            // modelBindingSource
+            // 
+            this.modelBindingSource.DataSource = typeof(BezierToy.Model);
+            // 
             // removeButton
             // 
             this.removeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.removeButton.Location = new System.Drawing.Point(691, 431);
+            this.removeButton.Location = new System.Drawing.Point(691, 398);
             this.removeButton.Name = "removeButton";
-            this.removeButton.Size = new System.Drawing.Size(123, 23);
+            this.removeButton.Size = new System.Drawing.Size(123, 21);
             this.removeButton.TabIndex = 14;
             this.removeButton.Text = "Remove";
             this.removeButton.UseVisualStyleBackColor = true;
@@ -367,9 +397,9 @@
             // addButton
             // 
             this.addButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.addButton.Location = new System.Drawing.Point(820, 431);
+            this.addButton.Location = new System.Drawing.Point(820, 398);
             this.addButton.Name = "addButton";
-            this.addButton.Size = new System.Drawing.Size(121, 23);
+            this.addButton.Size = new System.Drawing.Size(121, 21);
             this.addButton.TabIndex = 15;
             this.addButton.Text = "Add";
             this.addButton.UseVisualStyleBackColor = true;
@@ -378,9 +408,9 @@
             // noneLabel
             // 
             this.noneLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.noneLabel.Location = new System.Drawing.Point(691, 484);
+            this.noneLabel.Location = new System.Drawing.Point(691, 447);
             this.noneLabel.Name = "noneLabel";
-            this.noneLabel.Size = new System.Drawing.Size(250, 129);
+            this.noneLabel.Size = new System.Drawing.Size(250, 119);
             this.noneLabel.TabIndex = 0;
             this.noneLabel.Text = "None";
             this.noneLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -399,27 +429,24 @@
             // 
             this.reducedBezierCurveDetailView.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.reducedBezierCurveDetailView.Curve = null;
-            this.reducedBezierCurveDetailView.Location = new System.Drawing.Point(691, 484);
+            this.reducedBezierCurveDetailView.Location = new System.Drawing.Point(691, 447);
             this.reducedBezierCurveDetailView.MethodsDisplayMember = "Name";
             this.reducedBezierCurveDetailView.Name = "reducedBezierCurveDetailView";
             this.reducedBezierCurveDetailView.Reducers = null;
-            this.reducedBezierCurveDetailView.Size = new System.Drawing.Size(250, 129);
+            this.reducedBezierCurveDetailView.Size = new System.Drawing.Size(250, 119);
             this.reducedBezierCurveDetailView.TabIndex = 1;
+            this.reducedBezierCurveDetailView.Visible = false;
             // 
             // reducedBezierCurvesView
             // 
             this.reducedBezierCurvesView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.reducedBezierCurvesView.DataSource = null;
-            this.reducedBezierCurvesView.Location = new System.Drawing.Point(691, 119);
+            this.reducedBezierCurvesView.Location = new System.Drawing.Point(691, 110);
             this.reducedBezierCurvesView.Name = "reducedBezierCurvesView";
-            this.reducedBezierCurvesView.Size = new System.Drawing.Size(250, 306);
+            this.reducedBezierCurvesView.Size = new System.Drawing.Size(250, 282);
             this.reducedBezierCurvesView.TabIndex = 13;
             this.reducedBezierCurvesView.SelectedCurveChanged += new System.Action(this.reducedBezierCurvesView_SelectedCurveChanged);
-            // 
-            // baseCurveBindingSource
-            // 
-            this.baseCurveBindingSource.DataSource = typeof(BezierToy.BezierCurve);
             // 
             // baseCurveColorView
             // 
@@ -427,20 +454,16 @@
             this.baseCurveColorView.BackColor = System.Drawing.Color.Red;
             this.baseCurveColorView.DataBindings.Add(new System.Windows.Forms.Binding("BackColor", this.baseCurveBindingSource, "Color", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.baseCurveColorView.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.baseCurveColorView.Location = new System.Drawing.Point(703, 92);
+            this.baseCurveColorView.Location = new System.Drawing.Point(703, 85);
             this.baseCurveColorView.Name = "baseCurveColorView";
-            this.baseCurveColorView.Size = new System.Drawing.Size(13, 13);
+            this.baseCurveColorView.Size = new System.Drawing.Size(13, 12);
             this.baseCurveColorView.TabIndex = 11;
-            // 
-            // modelBindingSource
-            // 
-            this.modelBindingSource.DataSource = typeof(BezierToy.Model);
             // 
             // MainWindow
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(953, 625);
+            this.ClientSize = new System.Drawing.Size(953, 577);
             this.Controls.Add(this.reducedBezierCurveDetailView);
             this.Controls.Add(selectedCurveLabel);
             this.Controls.Add(this.addButton);
@@ -456,17 +479,17 @@
             this.Controls.Add(this.noneLabel);
             this.KeyPreview = true;
             this.MainMenuStrip = this.menu;
-            this.MinimumSize = new System.Drawing.Size(640, 480);
+            this.MinimumSize = new System.Drawing.Size(640, 446);
             this.Name = "MainWindow";
             this.ShowIcon = false;
             this.Text = "BezierToy";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainWindow_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.MainWindow_KeyUp);
+            ((System.ComponentModel.ISupportInitialize)(this.baseCurveBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.canvas)).EndInit();
             this.menu.ResumeLayout(false);
             this.menu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.reducedCurvesBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.baseCurveBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.modelBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -513,6 +536,8 @@
         private System.Windows.Forms.SaveFileDialog saveModelDialog;
         private System.Windows.Forms.OpenFileDialog openModelDialog;
         private System.Windows.Forms.SaveFileDialog exportDialog;
+        private System.Windows.Forms.ToolStripMenuItem settinhToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem bztPngToolStripMenuItem;
     }
 }
 

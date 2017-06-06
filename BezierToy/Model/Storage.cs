@@ -16,6 +16,10 @@ namespace BezierToy
     {
         public void Save(string filename)
         {
+            if (Model.Instance.SaveBztPng)
+            {
+                SaveBztPngFunc(filename);
+            }
             using (XmlTextWriter tw = new XmlTextWriter(filename, Encoding.UTF8))
             {
                 tw.Formatting = Formatting.Indented;
@@ -169,6 +173,13 @@ namespace BezierToy
                 bitmap.Save(filename, format);
             }
         }
+
+        public void SaveBztPngFunc(string filename) {
+            //Save(filename);
+            string pngstr = filename.Split('.')[0] + ".png";
+            Export(pngstr, ImageFormat.Png);
+        }
+
     }
 
     partial class ConstrainedReducer

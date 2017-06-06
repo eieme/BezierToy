@@ -147,6 +147,21 @@ namespace BezierToy
             get { return reducers; }
         }
 
+        private bool bztpng = true;
+        public bool SaveBztPng
+        {
+            get { return bztpng; }
+            set
+            {
+                if (bztpng != value)
+                {
+                    bztpng = value;
+                    RaisePropertyChanged("SaveBztPng");
+                }
+            }
+        }
+
+
         private Model()
         {
             SelectedPoints.Changed

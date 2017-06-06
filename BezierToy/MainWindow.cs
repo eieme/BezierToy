@@ -383,5 +383,15 @@ namespace BezierToy
             if (exportDialog.ShowDialog() == DialogResult.OK)
                 Model.Export(exportDialog.FileName, ImageFormat.Bmp);
         }
+
+        private void settinhToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void bztPngToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Model.SaveBztPng = settinhToolStripMenuItem.Checked;
+        }
     }
 }
